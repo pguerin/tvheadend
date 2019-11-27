@@ -109,18 +109,14 @@ extract_4byte(const uint8_t *ptr)
 static inline uint16_t
 extract_tsid(const uint8_t *ptr)
 {
-  uint16_t r = (ptr[0] << 8) | ptr[1];
-  if (r == MPEGTS_TSID_NONE) r = 55555;
-  return r;
+  return (ptr[0] << 8) | ptr[1];
 }
 
 
 static inline uint16_t
 extract_onid(const uint8_t *ptr)
 {
-  uint16_t r = (ptr[0] << 8) | ptr[1];
-  if (r == MPEGTS_ONID_NONE) r = 55555;
-  return r;
+  return (ptr[0] << 8) | ptr[1];
 }
 
 
@@ -2430,6 +2426,10 @@ psi_parse_pmt
       hts_stream_type = SCT_AC3;
       break;
     
+    case 0x87:
+      hts_stream_type = SCT_EAC3;
+      break;
+
     case 0x0f:
       hts_stream_type = SCT_MP4A;
       break;
